@@ -1,0 +1,18 @@
+#unzip the file using pandas
+import zipfile
+zip_ref=zipfile.ZipFile('D:\\Data Science\\Netflix_data_analysis_project\\archive (1).zip')
+zip_ref.extractall()
+zip_ref.close()
+
+
+#import the file to pandas library
+import pandas as pd
+df=pd.read_csv('D:\\Data Science\\Netflix_data_analysis_project\\archive (1).zip')
+df.head(10)
+
+
+#load the file to sql server management studio
+import sqlalchemy as sal
+engine=sal.create_engine('mssql://Arnab-Podder/master?driver=ODBC+DRIVER+17+FOR+SQL+SERVER')
+conn1=engine.connect()
+df.to_sql('netflix_raw',con=conn1,index=False,if_exists='append')
